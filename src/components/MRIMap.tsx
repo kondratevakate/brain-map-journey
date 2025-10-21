@@ -1,74 +1,58 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MapPin, Search } from "lucide-react";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+import { APIProvider, Map, AdvancedMarker, Pin, InfoWindow } from '@vis.gl/react-google-maps';
+
+interface MRICenter {
+  name: string;
+  position: { lat: number; lng: number };
+  price: string;
+  address: string;
+}
+
+const mriCenters: MRICenter[] = [
+  { 
+    name: "Almaty Medical Center", 
+    position: { lat: 43.2220, lng: 76.8512 },
+    price: "$95",
+    address: "Abay Ave 150, Almaty"
+  },
+  { 
+    name: "Advanced Diagnostic Center", 
+    position: { lat: 43.2380, lng: 76.8890 },
+    price: "$99",
+    address: "Dostyk Ave 132, Almaty"
+  },
+  { 
+    name: "Almaty Brain Imaging", 
+    position: { lat: 43.2567, lng: 76.9286 },
+    price: "$89",
+    address: "Al-Farabi Ave 77, Almaty"
+  },
+  { 
+    name: "Premium MRI Clinic", 
+    position: { lat: 43.2630, lng: 76.9456 },
+    price: "$92",
+    address: "Timiryazev St 42, Almaty"
+  },
+  { 
+    name: "Neuro Imaging Almaty", 
+    position: { lat: 43.2156, lng: 76.8295 },
+    price: "$99",
+    address: "Satpayev St 90, Almaty"
+  },
+];
 
 const MRIMap = () => {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const [mapboxToken, setMapboxToken] = useState("");
-  const [showTokenInput, setShowTokenInput] = useState(true);
+  const [apiKey, setApiKey] = useState("");
+  const [showMap, setShowMap] = useState(false);
+  const [selectedCenter, setSelectedCenter] = useState<MRICenter | null>(null);
 
-  const initializeMap = (token: string) => {
-    if (!mapContainer.current || map.current) return;
-
-    mapboxgl.accessToken = token;
-
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/light-v11",
-      center: [-98.5795, 39.8283], // Center of USA
-      zoom: 4,
-    });
-
-    map.current.addControl(
-      new mapboxgl.NavigationControl({
-        visualizePitch: false,
-      }),
-      "top-right"
-    );
-
-    // Sample MRI center locations
-    const mriCenters = [
-      { name: "Stanford Imaging Center", coords: [-122.1697, 37.4275], price: "$95" },
-      { name: "NYC Advanced MRI", coords: [-74.0060, 40.7128], price: "$99" },
-      { name: "Chicago Brain Imaging", coords: [-87.6298, 41.8781], price: "$89" },
-      { name: "Austin Medical Scan", coords: [-97.7431, 30.2672], price: "$92" },
-      { name: "Miami Neuro Imaging", coords: [-80.1918, 25.7617], price: "$99" },
-    ];
-
-    // Add markers
-    mriCenters.forEach((center) => {
-      const el = document.createElement("div");
-      el.className = "w-10 h-10 rounded-full bg-primary/90 border-2 border-white shadow-lg flex items-center justify-center cursor-pointer hover:scale-110 transition-transform";
-      el.innerHTML = '<svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>';
-
-      const popup = new mapboxgl.Popup({ offset: 25, closeButton: false }).setHTML(`
-        <div class="p-3">
-          <h3 class="font-bold text-sm mb-1">${center.name}</h3>
-          <p class="text-xs text-gray-600 mb-2">Clinical-grade 3T MRI</p>
-          <p class="text-primary font-bold mb-2">${center.price}</p>
-          <button class="w-full px-3 py-1.5 bg-primary text-white text-xs rounded-md hover:bg-primary/90 transition-colors">
-            Book with HelloMRI
-          </button>
-        </div>
-      `);
-
-      new mapboxgl.Marker(el)
-        .setLngLat(center.coords as [number, number])
-        .setPopup(popup)
-        .addTo(map.current!);
-    });
-
-    setShowTokenInput(false);
-  };
-
-  const handleTokenSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (mapboxToken.trim()) {
-      initializeMap(mapboxToken);
+    if (apiKey.trim()) {
+      setShowMap(true);
     }
   };
 
@@ -83,29 +67,37 @@ const MRIMap = () => {
               Find an MRI near you
             </h2>
             <p className="text-xl text-muted-foreground">
-              See live availability and book instantly
+              See live availability in Almaty and book instantly
             </p>
           </div>
 
-          {showTokenInput ? (
+          {!showMap ? (
             <div className="max-w-md mx-auto backdrop-blur-md bg-white/70 rounded-2xl p-8 border border-white/20 shadow-xl animate-scale-in">
               <div className="text-center mb-6">
                 <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-2">Enter Mapbox Token</h3>
-                <p className="text-sm text-muted-foreground">
-                  Get your free token at{" "}
-                  <a href="https://mapbox.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                    mapbox.com
+                <h3 className="text-xl font-bold mb-2">Enter Google Maps API Key</h3>
+                <p className="text-sm text-muted-foreground mb-2">
+                  Get your free API key at{" "}
+                  <a 
+                    href="https://console.cloud.google.com/google/maps-apis" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-primary hover:underline"
+                  >
+                    Google Cloud Console
                   </a>
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Enable Maps JavaScript API for your project
                 </p>
               </div>
               
-              <form onSubmit={handleTokenSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <Input
                   type="text"
-                  placeholder="pk.eyJ1Ij..."
-                  value={mapboxToken}
-                  onChange={(e) => setMapboxToken(e.target.value)}
+                  placeholder="AIzaSy..."
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
                   className="bg-white/50"
                 />
                 <Button type="submit" className="w-full" size="lg">
@@ -116,15 +108,61 @@ const MRIMap = () => {
             </div>
           ) : (
             <div className="animate-fade-in">
-              <div 
-                ref={mapContainer} 
-                className="h-[600px] rounded-2xl overflow-hidden shadow-xl border border-white/20"
-              />
+              <div className="h-[600px] rounded-2xl overflow-hidden shadow-xl border border-white/20">
+                <APIProvider apiKey={apiKey}>
+                  <Map
+                    defaultCenter={{ lat: 43.2380, lng: 76.8890 }}
+                    defaultZoom={12}
+                    mapId="almaty-mri-map"
+                    gestureHandling="greedy"
+                    disableDefaultUI={false}
+                  >
+                    {mriCenters.map((center, index) => (
+                      <AdvancedMarker
+                        key={index}
+                        position={center.position}
+                        onClick={() => setSelectedCenter(center)}
+                      >
+                        <Pin
+                          background={"hsl(217 91% 60%)"}
+                          borderColor={"#fff"}
+                          glyphColor={"#fff"}
+                        />
+                      </AdvancedMarker>
+                    ))}
+
+                    {selectedCenter && (
+                      <InfoWindow
+                        position={selectedCenter.position}
+                        onCloseClick={() => setSelectedCenter(null)}
+                      >
+                        <div className="p-3 min-w-[200px]">
+                          <h3 className="font-bold text-sm mb-1 text-foreground">
+                            {selectedCenter.name}
+                          </h3>
+                          <p className="text-xs text-muted-foreground mb-1">
+                            {selectedCenter.address}
+                          </p>
+                          <p className="text-xs text-muted-foreground mb-2">
+                            Clinical-grade 3T MRI
+                          </p>
+                          <p className="text-primary font-bold mb-3">
+                            {selectedCenter.price}
+                          </p>
+                          <button className="w-full px-3 py-1.5 bg-primary text-white text-xs rounded-md hover:bg-primary/90 transition-colors">
+                            Book with HelloMRI
+                          </button>
+                        </div>
+                      </InfoWindow>
+                    )}
+                  </Map>
+                </APIProvider>
+              </div>
               
               <div className="mt-8 text-center">
                 <Button variant="hero" size="xl">
                   <MapPin className="mr-2 w-5 h-5" />
-                  Find My MRI
+                  Find My MRI in Almaty
                 </Button>
               </div>
             </div>
