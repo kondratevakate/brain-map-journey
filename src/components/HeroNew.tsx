@@ -44,7 +44,7 @@ const HeroNew = () => {
       </div>
 
       <section className="min-h-screen pt-16 bg-gradient-to-br from-purple-100 via-blue-50 to-purple-50 relative overflow-hidden">
-        <div className="container mx-auto px-4 py-20">
+        <div className="container mx-auto px-4 py-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto mb-24">
             {/* Left content */}
             <div className="space-y-8">
