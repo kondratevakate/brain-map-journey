@@ -24,10 +24,10 @@ const HeroNew = () => {
 
   return (
     <>
-      {/* Scroll Progress Line */}
-      <div className="fixed left-8 top-0 bottom-0 w-0.5 bg-border/30 z-40 hidden lg:block">
+      {/* Scroll Progress Line - Centered */}
+      <div className="fixed left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-border/20 z-40 hidden lg:block">
         <div 
-          className="bg-primary transition-all duration-300 ease-out w-full"
+          className="bg-border/40 transition-all duration-300 ease-out w-full"
           style={{ height: `${scrollProgress}%` }}
         />
       </div>
