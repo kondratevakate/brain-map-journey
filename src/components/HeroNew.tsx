@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import SampleReportModal from "@/components/SampleReportModal";
 
 const HeroNew = () => {
+  const [showReport, setShowReport] = useState(false);
+  
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -24,11 +28,13 @@ const HeroNew = () => {
             <Button 
               variant="outline"
               size="lg"
-              onClick={() => scrollToSection("pricing")}
+              onClick={() => setShowReport(true)}
               className="rounded-full border-2 border-foreground hover:bg-foreground hover:text-background px-8"
             >
               Get My Brain Map →
             </Button>
+            
+            <SampleReportModal open={showReport} onOpenChange={setShowReport} />
           </div>
 
           {/* Right content - Metrics cards */}

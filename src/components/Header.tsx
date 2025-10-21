@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SampleReportModal from "@/components/SampleReportModal";
 
 const Header = () => {
+  const [showReport, setShowReport] = useState(false);
+  
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -39,7 +43,7 @@ const Header = () => {
             </button>
             <Button 
               variant="outline"
-              onClick={() => scrollToSection("pricing")}
+              onClick={() => setShowReport(true)}
               className="rounded-full border-2 border-foreground hover:bg-foreground hover:text-background"
             >
               Get My Brain Map
@@ -47,6 +51,8 @@ const Header = () => {
           </div>
         </div>
       </div>
+      
+      <SampleReportModal open={showReport} onOpenChange={setShowReport} />
     </header>
   );
 };
