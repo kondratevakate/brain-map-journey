@@ -24,11 +24,22 @@ const HeroNew = () => {
 
   return (
     <>
-      {/* Scroll Progress Line - Centered */}
-      <div className="fixed left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-border/20 z-40 hidden lg:block">
+      {/* Scroll Progress Line - Centered, Dashed with Purple to Gray animation */}
+      <div className="fixed left-1/2 -translate-x-1/2 top-0 bottom-0 w-px z-40 hidden lg:block">
+        {/* Background dashed line (gray) */}
         <div 
-          className="bg-border/40 transition-all duration-300 ease-out w-full"
-          style={{ height: `${scrollProgress}%` }}
+          className="absolute inset-0 w-full"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(0deg, #e5e7eb 0px, #e5e7eb 8px, transparent 8px, transparent 16px)',
+          }}
+        />
+        {/* Animated purple line (scrolled portion) */}
+        <div 
+          className="absolute top-0 w-full transition-all duration-300 ease-out"
+          style={{ 
+            height: `${scrollProgress}%`,
+            backgroundImage: 'repeating-linear-gradient(0deg, #a855f7 0px, #a855f7 8px, transparent 8px, transparent 16px)',
+          }}
         />
       </div>
 
