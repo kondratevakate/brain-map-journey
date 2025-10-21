@@ -1,72 +1,147 @@
-import { Calendar, ScanLine, Brain } from "lucide-react";
-
-const steps = [
-  {
-    icon: Calendar,
-    title: "Reserve for $99",
-    description: "Refundable within 7 days — no questions asked.",
-    detail: "Secure your spot with our risk-free deposit. Change your mind? Full refund guaranteed.",
-  },
-  {
-    icon: ScanLine,
-    title: "Get scanned",
-    description: "20-minute MRI using clinical-grade equipment in off-peak hours.",
-    detail: "Comfortable, quiet, and conducted at certified imaging centers near you.",
-  },
-  {
-    icon: Brain,
-    title: "Receive your 3D brain",
-    description: "Delivered within 72 hours with insights and optional NFT.",
-    detail: "Interactive visualization with personalized brain-age estimation and longevity metrics.",
-  },
-];
+import { Brain } from "lucide-react";
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="py-24 bg-muted/30 relative overflow-hidden">
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      
+    <section id="how-it-works" className="py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            How It Works
+        <div className="max-w-6xl mx-auto text-center mb-16 animate-fade-in">
+          <h2 className="text-5xl md:text-6xl font-bold mb-4 text-foreground">
+            What we offer
           </h2>
           <p className="text-xl text-muted-foreground">
-            Three simple steps to understand your brain
+            See how your brain performs
           </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
-            {steps.map((step, index) => (
-              <div 
-                key={index}
-                className="group relative animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Connecting line for desktop */}
-                {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-primary/40 to-primary/20 -translate-x-1/2 z-0" />
-                )}
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left - Text Content */}
+            <div className="space-y-6">
+              <div className="inline-block px-4 py-2 bg-primary/10 rounded-full text-sm text-muted-foreground uppercase tracking-wider">
+                Clinical MRI + AI Insights
+              </div>
+              
+              <h3 className="text-4xl font-bold text-foreground leading-tight">
+                Beyond a standard MRI<br />
+                — a deeper view of your brain
+              </h3>
+              
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                You receive a full medical MRI scan with a certified radiologist's report. On top of that, our AI visualizes your brain in 3D and extracts personalized insights like Cognitive Age, Neuroplasticity Score, and Memory Index — giving you the context behind the diagnosis and showing how your brain evolves over time.
+              </p>
+            </div>
 
-                <div className="relative backdrop-blur-md bg-white/70 rounded-2xl p-8 border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full">
-                  {/* Step number */}
-                  <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg shadow-lg">
-                    {index + 1}
-                  </div>
+            {/* Right - Brain Images and Metrics */}
+            <div className="relative">
+              <div className="grid grid-cols-2 gap-6 mb-6">
+                {/* Clinical MRI */}
+                <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl p-6 flex items-center justify-center aspect-square">
+                  <Brain className="w-32 h-32 text-gray-400" />
+                </div>
 
-                  {/* Icon */}
-                  <div className="mb-6 inline-block p-4 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                    <step.icon className="w-8 h-8 text-primary" />
-                  </div>
-
-                  {/* Content */}
-                  <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
-                  <p className="text-muted-foreground mb-4">{step.description}</p>
-                  <p className="text-sm text-foreground/70">{step.detail}</p>
+                {/* 3D Colorful Brain */}
+                <div className="bg-gradient-to-br from-purple-100 via-blue-100 to-green-100 rounded-3xl p-6 flex items-center justify-center aspect-square">
+                  <Brain className="w-32 h-32 text-purple-500" />
                 </div>
               </div>
-            ))}
+
+              {/* Biometric Summary Card */}
+              <div className="bg-slate-900 rounded-3xl p-8 text-white">
+                <div className="text-sm text-slate-400 mb-6">Biometric summary</div>
+                
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <div className="w-20 h-20 mx-auto mb-3 relative">
+                      <svg className="w-full h-full transform -rotate-90">
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="36"
+                          stroke="rgba(255,255,255,0.1)"
+                          strokeWidth="8"
+                          fill="none"
+                        />
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="36"
+                          stroke="#10b981"
+                          strokeWidth="8"
+                          fill="none"
+                          strokeDasharray="226"
+                          strokeDashoffset="45"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-2xl font-bold">87</span>
+                      </div>
+                    </div>
+                    <div className="text-xs text-slate-400">In range</div>
+                  </div>
+
+                  <div className="text-center">
+                    <div className="w-20 h-20 mx-auto mb-3 relative">
+                      <svg className="w-full h-full transform -rotate-90">
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="36"
+                          stroke="rgba(255,255,255,0.1)"
+                          strokeWidth="8"
+                          fill="none"
+                        />
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="36"
+                          stroke="#8b5cf6"
+                          strokeWidth="8"
+                          fill="none"
+                          strokeDasharray="226"
+                          strokeDashoffset="36"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-2xl font-bold">8.4</span>
+                      </div>
+                    </div>
+                    <div className="text-xs text-slate-400">In range</div>
+                  </div>
+
+                  <div className="text-center">
+                    <div className="w-20 h-20 mx-auto mb-3 relative">
+                      <svg className="w-full h-full transform -rotate-90">
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="36"
+                          stroke="rgba(255,255,255,0.1)"
+                          strokeWidth="8"
+                          fill="none"
+                        />
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="36"
+                          stroke="#06b6d4"
+                          strokeWidth="8"
+                          fill="none"
+                          strokeDasharray="226"
+                          strokeDashoffset="113"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-2xl font-bold">20</span>
+                      </div>
+                    </div>
+                    <div className="text-xs text-slate-400">In range</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
