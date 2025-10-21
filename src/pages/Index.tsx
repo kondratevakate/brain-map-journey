@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import HeroNew from "@/components/HeroNew";
 import HowItWorks from "@/components/HowItWorks";
 import PersonalizedPathways from "@/components/PersonalizedPathways";
+import IntegratedHealth from "@/components/IntegratedHealth";
+import HowItWorksSteps from "@/components/HowItWorksSteps";
 import WhatYouReceive from "@/components/WhatYouReceive";
 import WhyItMatters from "@/components/WhyItMatters";
 import MRIMap from "@/components/MRIMap";
@@ -18,6 +20,8 @@ const Index = () => {
       <HeroNew />
       <HowItWorks />
       <PersonalizedPathways />
+      <IntegratedHealth />
+      <HowItWorksSteps />
       <WhatYouReceive />
       <WhyItMatters />
       <MRIMap />
