@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { Brain } from "lucide-react";
+import { Brain, Sparkles } from "lucide-react";
 
 const timelineData = [
   {
@@ -45,24 +45,38 @@ const AnimatedNumber = ({ value, duration = 2 }: { value: number; duration?: num
   return <span ref={ref}>{typeof value === 'number' && value < 20 ? count.toFixed(1) : count}</span>;
 };
 
-const TimelineNode = ({ isActive }: { isActive: boolean }) => (
-  <motion.div
-    className="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full"
-    style={{
-      background: '#A5A2FF',
-      boxShadow: isActive ? '0 0 12px #7B77FF' : '0 0 8px #A5A2FF',
-    }}
-    initial={{ opacity: 0, scale: 0.7 }}
-    animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.7 }}
-    transition={{ duration: 0.4 }}
-  />
-);
+const TimelineNode = ({ isActive }: { isActive: boolean }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      className="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full cursor-pointer"
+      style={{
+        background: 'linear-gradient(135deg, #A5A2FF 0%, #6E5EFF 100%)',
+        boxShadow: isActive 
+          ? '0 0 10px #7B77FF, 0 0 20px rgba(123, 119, 255, 0.3)' 
+          : '0 0 8px rgba(165, 162, 255, 0.5)',
+      }}
+      initial={{ opacity: 0, scale: 0.7 }}
+      animate={isActive ? { 
+        opacity: 1, 
+        scale: isHovered ? 1.3 : 1 
+      } : { 
+        opacity: 0.6, 
+        scale: 0.7 
+      }}
+      transition={{ duration: 0.4 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    />
+  );
+};
 
 const HowItWorks = () => {
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start center", "end center"]
+    offset: ["start start", "end end"]
   });
 
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -71,13 +85,13 @@ const HowItWorks = () => {
     <section 
       ref={sectionRef}
       id="how-it-works" 
-      className="py-40 bg-white relative overflow-hidden"
+      className="py-24 bg-gradient-to-b from-white to-purple-50/30 relative overflow-hidden"
     >
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div 
-            className="text-center mb-32"
+            className="text-center mb-[120px]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -92,20 +106,23 @@ const HowItWorks = () => {
           </motion.div>
 
           {/* Timeline Container */}
-          <div className="relative">
-            {/* Vertical Line - Animated */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 hidden lg:block">
+          <div className="relative min-h-[1400px]">
+            {/* Vertical Spine - Centered and Animated */}
+            <div 
+              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 hidden lg:block"
+              style={{ filter: 'blur(1px)' }}
+            >
               {/* Background line */}
               <div 
-                className="absolute inset-0 rounded-full opacity-70"
+                className="absolute inset-0 w-0.5"
                 style={{
-                  background: 'linear-gradient(180deg, #C9C9FF 0%, #E2E2FF 100%)',
+                  background: 'linear-gradient(180deg, #B5B3FF 0%, #E4E4FF 100%)',
                 }}
               />
               
               {/* Animated progress line */}
               <motion.div 
-                className="absolute top-0 left-0 right-0 rounded-full"
+                className="absolute top-0 left-0 w-0.5"
                 style={{
                   height: lineHeight,
                   background: 'linear-gradient(180deg, #A5A2FF 0%, #7B77FF 100%)',
@@ -115,7 +132,7 @@ const HowItWorks = () => {
             </div>
 
             {/* Timeline Items */}
-            <div className="space-y-40">
+            <div className="space-y-[320px]">
               {timelineData.map((item, index) => (
                 <TimelineItem key={item.id} item={item} index={index} />
               ))}
@@ -125,14 +142,14 @@ const HowItWorks = () => {
       </div>
 
       {/* Bottom fade gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-50/30 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-50/50 to-transparent pointer-events-none" />
     </section>
   );
 };
 
 const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: number }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-15%" });
+  const isInView = useInView(ref, { once: true, margin: "-20%" });
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -140,24 +157,36 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
   });
 
   const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  
+  const isLeftText = index % 2 === 0;
 
   return (
-    <div ref={ref} className="relative">
-      {/* Timeline Node */}
-      <div className="absolute left-1/2 top-24 -translate-x-1/2 hidden lg:block z-10">
+    <div 
+      ref={ref} 
+      className="relative min-h-[540px]"
+      style={{
+        background: index % 2 === 0 
+          ? 'linear-gradient(180deg, #F9FAFF 0%, #FFFFFF 100%)'
+          : 'linear-gradient(180deg, #FFFFFF 0%, #F9FAFF 100%)'
+      }}
+    >
+      {/* Timeline Node - Centered on spine */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20">
         <TimelineNode isActive={isInView} />
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-        {/* Left Column - Text */}
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center py-12">
+        {/* Text Column */}
         <motion.div
-          className={`space-y-6 ${index % 2 === 1 ? 'lg:order-2' : ''}`}
-          initial={{ opacity: 0, x: -20 }}
+          className={`space-y-6 ${isLeftText ? 'lg:pr-16' : 'lg:order-2 lg:pl-16'}`}
+          initial={{ opacity: 0, x: isLeftText ? -30 : 30 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="inline-block px-4 py-2 bg-purple-50 rounded-full text-xs text-muted-foreground uppercase tracking-[0.05em] font-medium">
-            {item.label}
+          <div className="inline-block px-4 py-2 bg-purple-50/80 rounded-full">
+            <span className="text-xs uppercase tracking-wide font-medium" style={{ color: '#9B99FF' }}>
+              {item.label}
+            </span>
           </div>
           
           <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
@@ -169,47 +198,46 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
           </p>
         </motion.div>
 
-        {/* Right Column - Visual */}
+        {/* Visual Column */}
         <motion.div
-          className={index % 2 === 1 ? 'lg:order-1' : ''}
-          style={{ y: parallaxY }}
+          className={isLeftText ? 'lg:order-2' : 'lg:order-1'}
+          initial={{ opacity: 0, x: isLeftText ? 30 : -30 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
         >
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-          >
+          <motion.div style={{ y: parallaxY }}>
             {item.id === 1 ? (
               <div className="space-y-6">
-                {/* Brain Images */}
+                {/* Brain Images - MRI + 3D colored brain */}
                 <div className="grid grid-cols-2 gap-6 mb-6">
                   <motion.div 
-                    className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl p-8 flex items-center justify-center aspect-square"
+                    className="bg-gradient-to-br from-slate-900 to-slate-700 rounded-3xl p-8 flex items-center justify-center aspect-square shadow-xl"
                     whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <Brain className="w-32 h-32 text-gray-400" />
+                    <Brain className="w-32 h-32 text-slate-300" strokeWidth={1.5} />
                   </motion.div>
                   <motion.div 
-                    className="bg-gradient-to-br from-purple-100 via-blue-100 to-green-100 rounded-3xl p-8 flex items-center justify-center aspect-square"
+                    className="bg-gradient-to-br from-purple-200 via-blue-200 to-green-200 rounded-3xl p-8 flex items-center justify-center aspect-square shadow-xl relative overflow-hidden"
                     whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <Brain className="w-32 h-32 text-purple-500" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 via-blue-400/20 to-green-400/20" />
+                    <Brain className="w-32 h-32 text-purple-600 relative z-10" strokeWidth={1.5} />
                   </motion.div>
                 </div>
 
                 {/* Biometric Summary Card */}
                 <motion.div 
-                  className="rounded-3xl p-8 text-white"
+                  className="rounded-3xl p-8 text-white shadow-2xl"
                   style={{ background: '#0B0C1A' }}
                   whileHover={{ 
                     scale: 1.02,
-                    boxShadow: "0 0 20px rgba(0,0,0,0.1)"
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.2)"
                   }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <div className="text-sm text-slate-400 mb-6">Biometric summary</div>
+                  <div className="text-sm text-slate-400 mb-6 font-medium">Biometric summary</div>
                   
                   <div className="grid grid-cols-3 gap-6">
                     {[
@@ -256,9 +284,20 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
                 </motion.div>
               </div>
             ) : (
-              <div className="bg-gradient-to-br from-purple-100 via-blue-50 to-white rounded-3xl p-12 border border-purple-200/50">
-                <Brain className="w-full h-64 text-purple-300" />
-              </div>
+              <motion.div 
+                className="bg-gradient-to-br from-purple-100/80 via-blue-50/60 to-pink-50/40 rounded-3xl p-16 border border-purple-200/50 shadow-lg backdrop-blur-sm relative overflow-hidden"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Neural flower artwork placeholder */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-200/30 via-transparent to-blue-200/30" />
+                <div className="relative flex items-center justify-center">
+                  <Sparkles className="w-48 h-48 text-purple-400 opacity-80" strokeWidth={1} />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Brain className="w-32 h-32 text-blue-300 opacity-60" strokeWidth={1.5} />
+                  </div>
+                </div>
+              </motion.div>
             )}
           </motion.div>
         </motion.div>
