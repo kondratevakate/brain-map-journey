@@ -27,9 +27,9 @@ const Index = () => {
       <WhatYouReceive />
       <WhyItMatters />
       <MRIMap />
-      <Pricing />
       <DataPrivacy />
       <Testimonials />
+      <Pricing />
       <Footer />
       <CookieConsent />
     </div>
