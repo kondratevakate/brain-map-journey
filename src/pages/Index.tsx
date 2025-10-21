@@ -4,6 +4,7 @@ import HowItWorks from "@/components/HowItWorks";
 import PersonalizedPathways from "@/components/PersonalizedPathways";
 import IntegratedHealth from "@/components/IntegratedHealth";
 import HowItWorksSteps from "@/components/HowItWorksSteps";
+import BrainHealthSection from "@/components/BrainHealthSection";
 import WhatYouReceive from "@/components/WhatYouReceive";
 import WhyItMatters from "@/components/WhyItMatters";
 import MRIMap from "@/components/MRIMap";
@@ -22,6 +23,7 @@ const Index = () => {
       <PersonalizedPathways />
       <IntegratedHealth />
       <HowItWorksSteps />
+      <BrainHealthSection />
       <WhatYouReceive />
       <WhyItMatters />
       <MRIMap />
