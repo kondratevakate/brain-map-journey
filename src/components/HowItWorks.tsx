@@ -45,32 +45,26 @@ const AnimatedNumber = ({ value, duration = 2 }: { value: number; duration?: num
   return <span ref={ref}>{typeof value === 'number' && value < 20 ? count.toFixed(1) : count}</span>;
 };
 
-const TimelineNode = ({ isActive }: { isActive: boolean }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <motion.div
-      className="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full cursor-pointer"
-      style={{
-        background: 'linear-gradient(135deg, #A5A2FF 0%, #6E5EFF 100%)',
-        boxShadow: isActive 
-          ? '0 0 10px #7B77FF, 0 0 20px rgba(123, 119, 255, 0.3)' 
-          : '0 0 8px rgba(165, 162, 255, 0.5)',
-      }}
-      initial={{ opacity: 0, scale: 0.7 }}
-      animate={isActive ? { 
-        opacity: 1, 
-        scale: isHovered ? 1.3 : 1 
-      } : { 
-        opacity: 0.6, 
-        scale: 0.7 
-      }}
-      transition={{ duration: 0.4 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-    />
-  );
-};
+const TimelineNode = ({ isActive }: { isActive: boolean }) => (
+  <motion.div
+    className="w-2 h-2 rounded-full"
+    style={{
+      background: '#9D97FF',
+      boxShadow: isActive 
+        ? '0 0 14px #7B77FF' 
+        : '0 0 10px #9D97FF',
+    }}
+    initial={{ opacity: 0, scale: 0.7 }}
+    animate={isActive ? { 
+      opacity: 1, 
+      scale: 1.15
+    } : { 
+      opacity: 0.7, 
+      scale: 1
+    }}
+    transition={{ duration: 0.2, ease: "easeOut" }}
+  />
+);
 
 const HowItWorks = () => {
   const sectionRef = useRef(null);
@@ -79,13 +73,13 @@ const HowItWorks = () => {
     offset: ["start start", "end end"]
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const spineScaleY = useTransform(scrollYProgress, [0, 0.95], [0, 1]);
 
   return (
     <section 
       ref={sectionRef}
       id="how-it-works" 
-      className="py-24 bg-gradient-to-b from-white to-purple-50/30 relative overflow-hidden"
+      className="py-24 bg-gradient-to-b from-white to-purple-50/30 relative overflow-visible"
     >
       <div className="container mx-auto px-4 relative">
         <div className="max-w-7xl mx-auto">
@@ -107,32 +101,27 @@ const HowItWorks = () => {
 
           {/* Timeline Container */}
           <div className="relative min-h-[1400px]">
-            {/* Vertical Spine - Centered and Animated */}
+            {/* Vertical Spine - Solid gradient with scroll-draw animation */}
             <div 
-              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 hidden lg:block"
-              style={{ filter: 'blur(1px)' }}
+              className="sticky top-24 left-1/2 -translate-x-1/2 w-0.5 h-full hidden lg:block pointer-events-none"
+              style={{ 
+                filter: 'blur(1px)',
+                zIndex: 10
+              }}
             >
-              {/* Background line */}
-              <div 
-                className="absolute inset-0 w-0.5"
-                style={{
-                  background: 'linear-gradient(180deg, #B5B3FF 0%, #E4E4FF 100%)',
-                }}
-              />
-              
-              {/* Animated progress line */}
               <motion.div 
-                className="absolute top-0 left-0 w-0.5"
+                className="absolute top-0 left-0 w-0.5 h-full origin-top"
                 style={{
-                  height: lineHeight,
-                  background: 'linear-gradient(180deg, #A5A2FF 0%, #7B77FF 100%)',
-                  transformOrigin: "top"
+                  background: 'linear-gradient(180deg, #B6B4FF 0%, #E6E6FF 100%)',
+                  opacity: 0.85,
+                  scaleY: spineScaleY
                 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
               />
             </div>
 
             {/* Timeline Items */}
-            <div className="space-y-[320px]">
+            <div className="space-y-[340px]">
               {timelineData.map((item, index) => (
                 <TimelineItem key={item.id} item={item} index={index} />
               ))}
@@ -149,14 +138,14 @@ const HowItWorks = () => {
 
 const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: number }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-20%" });
+  const isInView = useInView(ref, { once: true, margin: "-25%" });
   
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   });
 
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [30, -30]);
   
   const isLeftText = index % 2 === 0;
 
@@ -164,24 +153,19 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
     <div 
       ref={ref} 
       className="relative min-h-[540px]"
-      style={{
-        background: index % 2 === 0 
-          ? 'linear-gradient(180deg, #F9FAFF 0%, #FFFFFF 100%)'
-          : 'linear-gradient(180deg, #FFFFFF 0%, #F9FAFF 100%)'
-      }}
     >
       {/* Timeline Node - Centered on spine */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block z-20">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center justify-center z-20">
         <TimelineNode isActive={isInView} />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center py-12">
         {/* Text Column */}
         <motion.div
-          className={`space-y-6 ${isLeftText ? 'lg:pr-16' : 'lg:order-2 lg:pl-16'}`}
-          initial={{ opacity: 0, x: isLeftText ? -30 : 30 }}
+          className={`space-y-6 max-w-[560px] ${isLeftText ? 'lg:pr-12 lg:ml-auto' : 'lg:order-2 lg:pl-12'}`}
+          initial={{ opacity: 0, x: isLeftText ? -22 : 22 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
         >
           <div className="inline-block px-4 py-2 bg-purple-50/80 rounded-full">
             <span className="text-xs uppercase tracking-wide font-medium" style={{ color: '#9B99FF' }}>
@@ -201,9 +185,9 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
         {/* Visual Column */}
         <motion.div
           className={isLeftText ? 'lg:order-2' : 'lg:order-1'}
-          initial={{ opacity: 0, x: isLeftText ? 30 : -30 }}
+          initial={{ opacity: 0, x: isLeftText ? 14 : -14 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.45, delay: 0.1, ease: "easeOut" }}
         >
           <motion.div style={{ y: parallaxY }}>
             {item.id === 1 ? (
@@ -273,7 +257,7 @@ const TimelineItem = ({ item, index }: { item: typeof timelineData[0]; index: nu
                           </svg>
                           <div className="absolute inset-0 flex items-center justify-center">
                             <span className="text-2xl font-bold">
-                              <AnimatedNumber value={metric.value} />
+                              {isInView ? <AnimatedNumber value={metric.value} /> : '0'}
                             </span>
                           </div>
                         </div>
