@@ -19,6 +19,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <HeroNew />
+      <Testimonials />
       <HowItWorks />
       <PersonalizedPathways />
       <IntegratedHealth />
@@ -28,7 +29,6 @@ const Index = () => {
       <WhyItMatters />
       <MRIMap />
       <DataPrivacy />
-      <Testimonials />
       <Pricing />
       <Footer />
       <CookieConsent />
