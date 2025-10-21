@@ -9,6 +9,7 @@ import Pricing from "@/components/Pricing";
 import DataPrivacy from "@/components/DataPrivacy";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
       <DataPrivacy />
       <Testimonials />
       <Footer />
+      <CookieConsent />
     </div>
   );
 };
