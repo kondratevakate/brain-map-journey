@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './offerBlock.module.css';
 
 export default function OfferBlock() {
@@ -34,7 +35,28 @@ export default function OfferBlock() {
               </div>
             </div>
           </div>
-          {/* Right Block WIP <div></div> */}
+          <div className={styles.firstBlock}>
+            <div className={styles.firstBlockGroup}>
+              <Image
+                width={176}
+                height={167}
+                src={'/brain2d.png'}
+                alt={'brain2d'}
+              />
+              <Image
+                width={314}
+                height={282}
+                src={'/brain3d.png'}
+                alt={'brain3d'}
+              />
+            </div>
+            <Image
+              width={465}
+              height={207}
+              src={'/biometric.png'}
+              alt={'biometric'}
+            />
+          </div>
         </div>
         {/* Second row */}
         <div className={styles.infoRow}>
@@ -62,7 +84,14 @@ export default function OfferBlock() {
               </div>
             </div>
           </div>
-          {/* Right Block WIP <div></div> */}
+          <div className={styles.secondBlock}>
+            <Image
+              width={444}
+              height={625}
+              src={'/biology.png'}
+              alt={'biology'}
+            />
+          </div>
         </div>
         {/* Third Row */}
         <div className={styles.infoRow}>
@@ -91,7 +120,24 @@ export default function OfferBlock() {
               </div>
             </div>
           </div>
-          {/* Right Block WIP <div></div> */}
+          <div className={styles.thirdContainer}>
+            <div className={styles.thirdBlock}>
+              <Image
+                className={styles.tennis}
+                width={340}
+                height={518}
+                src={'/tennis.png'}
+                alt={'tennis'}
+              />
+              <Image
+                className={styles.score}
+                width={246}
+                height={369}
+                src={'/score.png'}
+                alt={'score'}
+              />
+            </div>
+          </div>
         </div>
         {/* Four row */}
         <div className={styles.infoRow}>
@@ -119,7 +165,17 @@ export default function OfferBlock() {
               </div>
             </div>
           </div>
-          {/* Right Block WIP <div></div> */}
+          <div className={styles.lastBlock}>
+            <div className={styles.lastBlockGroup}>
+              <Image
+                width={430}
+                height={540}
+                src={'/watch.png'}
+                alt={'watch'}
+              />
+              <Image width={430} height={53} src={'/whoop.png'} alt={'whoop'} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

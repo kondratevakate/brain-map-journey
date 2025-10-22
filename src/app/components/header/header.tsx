@@ -7,21 +7,6 @@ export default function Header() {
     <div className={styles.header}>
       <div className={styles.container}>
         <img className={styles.imgContainer} src="/girl.png" alt="girl" />
-
-        <nav className={styles.menu}>
-          <div className={`${styles.btnGroup} ${styles.mgleft}`}>
-            <button className={styles.textBtn}>How it work</button>
-            <button className={styles.textBtn}>Privacy</button>
-          </div>
-          <div className={styles.title}>
-            <Image width={28} height={28} src={'/logo.svg'} alt={'logo'} />
-            <span>HelloMRI</span>
-          </div>
-          <div className={styles.btnGroup}>
-            <button className={styles.textBtn}>Login</button>
-            <button className={styles.outlineBtn}>Get My Brain Map</button>
-          </div>
-        </nav>
         <div className={styles.main}>
           <div className={styles.leftBlock}>
             <span className={styles.leftTitle}>

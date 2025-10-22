@@ -1,0 +1,92 @@
+.container {
+  padding: 160px 60px;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  background: #0e101b;
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+.brainBlock {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  align-items: center;
+}
+
+.brainBlockInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.brainBlockTitle {
+  font-family: var(--font-dm-sans);
+  font-size: 44px;
+  line-height: 100%;
+  font-weight: 700;
+  color: #f4f4f6;
+}
+
+.text {
+  font-family: var(--font-dm-sans);
+  font-size: 24px;
+  line-height: 100%;
+  font-weight: 500;
+  color: #f4f4f6;
+  opacity: 0.6;
+}
+
+.hertieBlock {
+  margin-left: 100px;
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  justify-content: end;
+}
+
+.hertieBlock img {
+  height: 100px;
+}
+
+.emailBlock {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0 20px 0;
+}
+
+.form {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input {
+  border: 1px solid #c0b7f6;
+  background: #f4f4f60d;
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #f4f4f6;
+}
+
+.btn {
+  font-family: var(--font-dm-sans);
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: #c0b7f6;
+  color: #0e101b;
+  font-size: 16px;
+  line-height: 20px;
+  border: none;
+}
+
+.btn:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.btn:active {
+  opacity: 0.7;
+}

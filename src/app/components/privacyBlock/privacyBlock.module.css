@@ -1,0 +1,134 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.firstCircle {
+  min-width: 720px;
+  min-height: 720px;
+  max-width: 720px;
+  max-height: 720px;
+  border: 3px solid #c0b7f6;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.secondCircle {
+  min-width: 648px;
+  min-height: 648px;
+  max-width: 648px;
+  max-height: 648px;
+  border: 3px solid #c0b7f6;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.thirdCircle {
+  min-width: 565px;
+  min-height: 565px;
+  max-width: 565px;
+  max-height: 565px;
+  border: 3px solid #c0b7f6;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-dm-sans);
+  color: var(--main-text);
+  z-index: 2;
+}
+
+.circleTitle {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 100%;
+}
+
+.circleSubtitle {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  text-align: center;
+}
+
+.infoBlock {
+  background: #171b2d;
+  box-shadow: 0px 4px 8.7px 0px #10032e40;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #ffffff;
+  font-family: var(--font-dm-sans);
+  max-width: 250px;
+}
+
+.infoBlockTitle {
+  font-size: 24px;
+  line-height: 100%;
+  font-weight: 600;
+}
+
+.infoBlockSubtitle {
+  font-size: 16px;
+  line-height: 100%;
+  font-weight: 500;
+}
+
+.topLeft {
+  position: absolute;
+  top: 50;
+  left: -130;
+  z-index: 3;
+}
+
+.topRight {
+  position: absolute;
+  top: 120;
+  right: -120;
+  z-index: 3;
+}
+
+.bottomLeft {
+  position: absolute;
+  bottom: 30;
+  left: -50;
+  z-index: 3;
+}
+
+.bottomRight {
+  position: absolute;
+  bottom: 50;
+  right: -50;
+  z-index: 3;
+}
+
+.ring {
+  position: absolute;
+  bottom: 120;
+  right: -100;
+  z-index: 4;
+}
+
+.shield {
+  position: absolute;
+  top: 0;
+  left: 50;
+  z-index: 4;
+}

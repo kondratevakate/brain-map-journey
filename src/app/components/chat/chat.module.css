@@ -1,0 +1,71 @@
+.iconBtn {
+  min-width: 46px;
+  min-height: 46px;
+  max-width: 46px;
+  max-height: 46px;
+  border-radius: 50%;
+  background: #f4f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconBtn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.iconBtn:active {
+  opacity: 0.7;
+}
+
+.chatBlock {
+  position: relative;
+  width: 540px;
+  height: 630px;
+  border-radius: 40px;
+  box-shadow: 0px 35px 40px 0px #0000000f;
+  background: #fcfcfc;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  font-family: var(--font-dm-sans);
+  font-size: 20px;
+  line-height: 48px;
+  border-bottom: 1px solid #eff0f6;
+}
+
+.xBtn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.xBtn:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.inputBlock {
+  height: 68px;
+  width: 100%;
+  background: #eff0f6;
+  border-radius: 20px;
+  padding: 4px;
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  gap: 12px;
+}
+
+.messageBlock {
+  height: calc(100% - 68px - 48px);
+  overflow-y: scroll;
+}
