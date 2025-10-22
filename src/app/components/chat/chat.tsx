@@ -24,7 +24,17 @@ export default function Chat() {
             <span>HelloMRI Agent</span>
           </div>
           <div className={styles.messageBlock}></div>
-          <div className={styles.inputBlock}></div>
+          <div className={styles.inputBlock}>
+            <input type="text" className={styles.input} />
+            <button className={styles.sendBtn}>
+              <Image
+                width={18}
+                height={18}
+                src={'/chevron-right.svg'}
+                alt={'chevron'}
+              />
+            </button>
+          </div>
         </div>
       ) : (
         <div className={styles.iconBtn} onClick={() => setShowChat(true)}>
