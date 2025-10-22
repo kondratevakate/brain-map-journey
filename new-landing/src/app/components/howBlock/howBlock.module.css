@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 150px 60px;
+}
+
+.title {
+  display: flex;
+  justify-content: end;
+  font-family: var(--font-dm-sans);
+  font-size: 60px;
+  font-weight: 600;
+  line-height: 100%;
+  color: var(--main-text);
+}
+
+.stepBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 0 20px;
+}
+
+.firstStep {
+  display: flex;
+  justify-content: start;
+}
+
+.secondStep {
+  display: flex;
+  justify-content: center;
+}
+
+.thirdStep {
+  display: flex;
+  justify-content: end;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 60px;
+  max-width: 600px;
+}
+
+.circle {
+  max-width: 48px;
+  max-height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #c0b7f6;
+  color: #ffffff;
+  font-family: var(--font-dm-sans);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 100%;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.textBlockTitle {
+  font-family: var(--font-dm-sans);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 100%;
+  color: var(--main-text);
+}
+
+.textBlockSubtitle {
+  font-family: var(--font-dm-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+  color: var(--main-text);
+}
+
+.textBlockBody {
+  font-family: var(--font-dm-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+  color: #8c8c8c;
+}
