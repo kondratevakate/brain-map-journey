@@ -37,7 +37,15 @@ export default function SampleReportModal({ open, slides, onClose }: SampleRepor
       <div className={styles.modal} onClick={e => e.stopPropagation()}>
         <button className={styles.close} onClick={onClose}>×</button>
         <div className={styles.viewport}>
-          <Image width={800} height={600} src={slides[index].src} alt={slides[index].alt} />
+          <Image
+            width={800}
+            height={600}
+            src={slides[index].src}
+            alt={slides[index].alt}
+            sizes="(max-width: 768px) 90vw, 800px"
+            style={{ width: '100%', height: 'auto' }}
+            priority
+          />
         </div>
         <div className={styles.controls}>
           <button 

@@ -2,10 +2,11 @@
 .menu {
   background-color: #f4f4f6;
   border-radius: 99px;
-  padding: 8px;
+  padding: 8px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
 }
 
 .btnGroup {
@@ -65,4 +66,59 @@
 
 .textBtn:active {
   filter: brightness(0.8);
+}
+
+@media (max-width: 900px) {
+  .menu {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+  }
+
+  .title {
+    width: 100%;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .btnGroup {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .outlineBtn,
+  .textBtn {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  .menu {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 28px;
+    gap: 12px;
+  }
+
+  .title {
+    justify-content: flex-start;
+    font-size: 17px;
+  }
+
+  .btnGroup {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .outlineBtn,
+  .textBtn {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .outlineBtn {
+    border-radius: 24px;
+  }
 }

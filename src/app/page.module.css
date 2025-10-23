@@ -19,3 +19,29 @@
   border-radius: 99px;
   box-shadow: 0px 4px 8.7px 0px #10032e40;
 }
+
+@media (max-width: 900px) {
+  .chat {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .menu {
+    width: calc(100vw - 40px);
+    left: 20px;
+    top: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .chat {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .menu {
+    position: static;
+    width: auto;
+    margin: 16px;
+  }
+}

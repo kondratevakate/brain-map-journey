@@ -56,3 +56,44 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+@media (max-width: 768px) {
+  .backdrop {
+    align-items: flex-end;
+    padding-bottom: 16px;
+  }
+
+  .modal {
+    width: calc(100vw - 24px);
+    max-width: 520px;
+    margin: 0 12px;
+    padding: 18px 16px 20px;
+    border-radius: 20px;
+  }
+
+  .viewport :global(img) {
+    border-radius: 12px;
+  }
+
+  .controls {
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .arrow {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    width: calc(100vw - 20px);
+    margin: 0 10px;
+    padding: 16px 14px;
+  }
+
+  .controls span {
+    font-size: 13px;
+  }
+}

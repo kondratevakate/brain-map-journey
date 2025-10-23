@@ -130,3 +130,109 @@
   bottom: 0;
   right: 120px;
 }
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 24px;
+  }
+
+  .leftBlock {
+    margin-left: 24px;
+    margin-top: 100px;
+    margin-bottom: 160px;
+  }
+
+  .leftTitle {
+    font-size: 52px;
+  }
+
+  .leftText {
+    font-size: 18px;
+  }
+
+  .rightBlock {
+    margin-top: 180px;
+  }
+
+  .imgContainer {
+    right: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 28px 24px;
+  }
+
+  .main {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .leftBlock {
+    margin: 0;
+    max-width: none;
+  }
+
+  .leftTitle {
+    font-size: 48px;
+  }
+
+  .leftText {
+    font-size: 18px;
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+
+  .leftButton {
+    padding: 14px 18px;
+  }
+
+  .rightBlock {
+    margin-top: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .rightItem {
+    flex: 1 1 calc(50% - 16px);
+    min-width: 180px;
+  }
+
+  .imgContainer {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 24px 20px 28px;
+    border-radius: 28px;
+  }
+
+  .leftBlock {
+    gap: 16px;
+  }
+
+  .leftTitle {
+    font-size: 40px;
+  }
+
+  .leftText {
+    font-size: 16px;
+  }
+
+  .leftButton {
+    font-size: 15px;
+    padding: 12px 16px;
+  }
+
+  .rightBlock {
+    flex-direction: column;
+  }
+
+  .rightItem {
+    width: 100%;
+  }
+}
