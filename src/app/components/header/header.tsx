@@ -1,8 +1,17 @@
+'use client';
+
 import Image from 'next/image';
 import styles from './header.module.css';
 import MiniProgressbar from '../mini-progressbar/mini-progressbar';
 
 export default function Header() {
+  const scrollToElement = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className={styles.header}>
       <div className={styles.container}>
@@ -16,8 +25,14 @@ export default function Header() {
               Measure, understand, and elevate your mental performance with
               Neuro-Span™
             </span>
-            <button className={styles.leftButton}>Get My Brain Map →</button>
+            <button 
+              className={styles.leftButton}
+              onClick={() => scrollToElement('wait')}
+            >
+              Sample report →
+            </button>
           </div>
+          
           <div className={styles.rightBlock}>
             <div className={styles.rightItem}>
               <div className={styles.rightItemGroup}>
