@@ -7,7 +7,7 @@ export default function PriceBlock() {
       <div className={styles.leftBlock}>
         <span className={styles.leftBlockTitle}>First-time user offer</span>
         <div className={styles.leftBlockText}>
-          <span className={styles.leftBlockPrice}>$99</span>
+          <span className={styles.leftBlockPrice}>$249</span>
           <span>
             Fully refundable within 7 days No questions asked. Change your mind?
             Get 100% back.

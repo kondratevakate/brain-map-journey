@@ -13,7 +13,7 @@ export default function HowBlock() {
             <Image width={132} height={130} src={'/step1.svg'} alt={'step1'} />
             <div className={styles.circle}>1</div>
             <div className={styles.textBlock}>
-              <span className={styles.textBlockTitle}>Reserve for $99</span>
+              <span className={styles.textBlockTitle}>Reserve for $249</span>
               <span className={styles.textBlockSubtitle}>
                 Refundable within 7 days — no questions asked.
               </span>
