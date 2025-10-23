@@ -18,7 +18,7 @@ export default function Menu() {
           className={styles.textBtn}
           onClick={() => scrollToElement('howit')}
         >
-          How it work
+          How it works
         </button>
         <button
           className={styles.textBtn}
@@ -32,12 +32,17 @@ export default function Menu() {
         <span>HelloMRI</span>
       </div>
       <div className={styles.btnGroup}>
-        <button className={styles.textBtn}>Login</button>
+        <button 
+          className={styles.textBtn}
+          onClick={() => scrollToElement('wait')}
+        >
+          Join waitlist
+        </button>
         <button
           className={styles.outlineBtn}
           onClick={() => scrollToElement('wait')}
         >
-          Get My Brain Map
+          Sample report
         </button>
       </div>
     </nav>
