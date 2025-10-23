@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Namdhinggo, Mulish, DM_Sans } from 'next/font/google';
 import './globals.css';
+import CookieBanner from './components/cookieBanner/cookieBanner';
 
 const namdhingo = Namdhinggo({
   weight: '600',
@@ -48,6 +49,7 @@ export default function RootLayout({
         className={`${namdhingo.variable} ${mulish.variable} ${dmSans.variable}`}
       >
         {children}
+        <CookieBanner />
       </body>
     </html>
   );
