@@ -40,12 +40,12 @@
 }
 
 .outlineBtn:hover {
-  opacity: 0.8;
   cursor: pointer;
+  filter: brightness(0.9); 
 }
 
 .outlineBtn:active {
-  opacity: 0.7;
+  filter: brightness(0.8);
 }
 
 .textBtn {
@@ -59,10 +59,10 @@
 }
 
 .textBtn:hover {
-  opacity: 0.8;
   cursor: pointer;
+  filter: brightness(0.9);
 }
 
 .textBtn:active {
-  opacity: 0.7;
+  filter: brightness(0.8);
 }

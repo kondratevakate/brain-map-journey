@@ -23,3 +23,12 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+svg, svg path, svg line, svg circle, svg rect {
+  vector-effect: non-scaling-stroke;
+  shape-rendering: geometricPrecision;
+}
+
+img[src$=".svg"] {
+  shape-rendering: geometricPrecision;
+}

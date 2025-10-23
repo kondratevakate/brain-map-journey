@@ -31,8 +31,7 @@ export default function ChartBlock() {
         </div>
       </div>
       <div className={styles.rightBlock}>
-        <img src="/chart.png" alt="chart" />
-        <img src="/legendChart.png" alt="legend" />
+        <img src="/chart.svg" alt="chart" />
       </div>
     </div>
   );

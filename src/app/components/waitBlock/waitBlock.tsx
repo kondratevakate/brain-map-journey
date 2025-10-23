@@ -2,9 +2,16 @@
 
 import { ChangeEvent, useState } from 'react';
 import styles from './waitBlock.module.css';
+import SampleReportModal from '../sampleReportModal/sampleReportModal';
 
 export default function WaitBlock() {
   const [email, setEmail] = useState('');
+  const [showSample, setShowSample] = useState(false);
+
+  const sampleSlides = [
+    { src: '/report-slide-1.png', alt: 'Sample report – overview' },
+    { src: '/report-slide-2.png', alt: 'Sample report – details' }
+  ];
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target?.value.toLowerCase();
@@ -31,17 +38,16 @@ export default function WaitBlock() {
         <img src="/brain-group.png" alt="brains" />
       </div>
       <div className={styles.hertieBlock}>
-        <img src="/logo-hertie.png" alt="Logo" />
+        <img src="/logo-hertie.svg" alt="Logo" />
         <span className={styles.text}>
           We proudly collaborate with a leading research university. This
           partnership ensures you receive a scientifically-backed solution, not
-          just a technology, that helps you maintain a clear mind and a full
+          just a technology, that helps you maintain a clear mind and a full
           life for years to come.
         </span>
       </div>
       <div className={styles.emailBlock}>
         <div className={styles.form}>
-          <span className={styles.text}>Email</span>
           <input
             value={email}
             onChange={handleEmailChange}
@@ -49,9 +55,23 @@ export default function WaitBlock() {
             placeholder="yourbrain@hellomri.com"
             className={styles.input}
           />
-          <button className={styles.btn}>Join the waitlist</button>
+          <div className={styles.actions}>
+            <button
+              type="button"
+              className={styles.linkBtn}
+              onClick={() => setShowSample(true)}
+            >
+              Sample report
+            </button>
+            <button className={styles.btn}>Join the waitlist</button>
+          </div>
         </div>
       </div>
+      <SampleReportModal 
+        open={showSample} 
+        slides={sampleSlides} 
+        onClose={() => setShowSample(false)} 
+      />
     </div>
   );
 }

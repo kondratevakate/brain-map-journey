@@ -5,9 +5,11 @@ export default function FeatureBlock() {
   return (
     <div className={styles.container}>
       <div className={styles.block}>
-        <Image width={78} height={80} src={'/feature1.svg'} alt={'circle'} />
+        <div className={styles.icon}>
+          <Image fill src={'/feature1.svg'} alt={'circle'} sizes="80px" />
+        </div>
         <div className={styles.info}>
-          <span className={styles.title}>Isights you can act on</span>
+          <span className={styles.title}>Insights you can act on</span>
           <span className={styles.text}>
             See how habits, rest and learning affect your brain. Use this
             knowledge to perform better at work, in sport and in creative life.
@@ -15,7 +17,9 @@ export default function FeatureBlock() {
         </div>
       </div>
       <div className={styles.block}>
-        <Image width={78} height={80} src={'/feature2.svg'} alt={'brain'} />
+        <div className={styles.icon}>
+          <Image fill src={'/brain-black.svg'} alt={'brain'} sizes="80px" />
+        </div>
         <div className={styles.info}>
           <span className={styles.title}>AI meets neuroscience</span>
           <span className={styles.text}>
@@ -26,7 +30,9 @@ export default function FeatureBlock() {
         </div>
       </div>
       <div className={styles.block}>
-        <Image width={78} height={80} src={'/feature3.svg'} alt={'line'} />
+        <div className={styles.icon}>
+          <Image fill src={'/feature3.svg'} alt={'line'} sizes="80px" />
+        </div>
         <div className={styles.info}>
           <span className={styles.title}>Clarity that compounds</span>
           <span className={styles.text}>

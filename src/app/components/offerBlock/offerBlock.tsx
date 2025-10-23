@@ -173,7 +173,7 @@ export default function OfferBlock() {
                 src={'/watch.png'}
                 alt={'watch'}
               />
-              <Image width={430} height={53} src={'/whoop.png'} alt={'whoop'} />
+              <Image width={430} height={53} src={'/whoop.svg'} alt={'whoop'} />
             </div>
           </div>
         </div>

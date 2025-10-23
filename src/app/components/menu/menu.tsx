@@ -28,7 +28,7 @@ export default function Menu() {
         </button>
       </div>
       <div className={styles.title}>
-        <Image width={28} height={28} src={'/logo.svg'} alt={'logo'} />
+        <Image width={28} height={28} src={'/brain-black.svg'} alt={'logo'} />
         <span>HelloMRI</span>
       </div>
       <div className={styles.btnGroup}>
